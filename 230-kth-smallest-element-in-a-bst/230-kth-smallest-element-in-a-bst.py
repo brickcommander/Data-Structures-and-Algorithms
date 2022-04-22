@@ -13,8 +13,7 @@ class Solution:
             return root.val
         self.k -= 1
         x = self.helper(root.right)
-        if x != -1: return x
-        return -1
+        return x
         
         
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
