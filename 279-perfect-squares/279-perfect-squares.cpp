@@ -33,9 +33,10 @@ class Solution {
     /*
         This can also be solved with Lagrange's four square theoram,
             which says that, every natrual number is sum of squares of 4 numbers.
-            1^2 = 1^2 + 0^2 + 0^2 + 0^2
-            5^2 = 4^2 + 3^2 + 0^2 + 0^2
-            Proof : 
+            Example:
+                1^2 = 1^2 + 0^2 + 0^2 + 0^2
+                5^2 = 4^2 + 3^2 + 0^2 + 0^2
+            Proof: 
                 (a^2 + b^2 + c^2 + d^2) * (p^2 + q^2 + r^2 + s^2) = (..)^2 + (..)^2 + (..)^2 + (..)^2
                     // Either every number is (multiple of two numbers) or (is a prefect square).
     */
