@@ -37,7 +37,7 @@ class Solution {
             5^2 = 4^2 + 3^2 + 0^2 + 0^2
             Proof : 
                 (a^2 + b^2 + c^2 + d^2) * (p^2 + q^2 + r^2 + s^2) = (..)^2 + (..)^2 + (..)^2 + (..)^2
-                    // Either every number is multiple of two numbers or is a prefect square.
+                    // Either every number is (multiple of two numbers) or (is a prefect square).
     */
     
 public:
