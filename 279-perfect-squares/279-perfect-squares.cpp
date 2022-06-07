@@ -43,6 +43,7 @@ class Solution {
     
 public:
     int numSquares(int n) {
+        // Answer can only be 1, 2, 3, or 4
         dp = vector<vector<int>>(n+1, vector<int>(sqrt(n)+10, -1));
         return iter(n);
         return recur(n, 1);
