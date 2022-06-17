@@ -25,6 +25,23 @@ class Solution {
         
         return ans;
     }
+    
+    int iterative(int egg, int floor) {
+        for(int j=1; j<=floor; j++)
+            dp[1][j] = j;
+        for(int i=1; i<=floor; i++)
+            dp[i][1] = 1;
+        
+        for(int e=2; e<=egg; e++)
+            for(int k=2; k<=floor; k++) {
+                int ans = 1e9;
+                for(int j=1, rj=k-1; j<k; j++, rj--)
+                    ans = min(ans, 1+max(dp[e-1][j], dp[e][rj]));
+            }
+        
+        return dp[egg][floor];
+    }
+    
 public:
     int superEggDrop(int egg, int floor) {
         dp = vector<vector<int>>(egg+1, vector<int>(floor+1, -1));
