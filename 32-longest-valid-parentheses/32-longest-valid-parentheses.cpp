@@ -11,7 +11,7 @@ public:
             }
         }
         
-        int longest = (st.empty() ? s.size() : 0);
+        int longest = 0;
         int a = s.size(), b = 0;
         while(!st.empty()) {
             b = st.top(); st.pop();
