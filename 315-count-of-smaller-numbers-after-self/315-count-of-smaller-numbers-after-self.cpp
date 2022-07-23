@@ -1,46 +1,49 @@
 
 class Solution {
-    class segmentTree {
-    private:
-        int offset, last;
-        vector<int> v;
-    public:
-        segmentTree() : v(4*2*1e4, 0), offset(1e4+1), last(2*1e4) {};
-        void insert(int x) {
-            insert(1, 1, last, x+offset);
-        }
-        int count(int x) {
-            return query(1, 1, last, 1, x+offset-1);
-        }
-    private:
-        void insert(int p, int low, int high, int val) {
-            if(low > high || val < low || high < val) return;
-            if(low == high) {
-                v[p]++;
-                return;
-            }
-            int mid = (low + high) / 2;
-            insert(p*2, low, mid, val);
-            insert(p*2+1, mid+1, high, val);
-            v[p] = v[p*2] + v[p*2+1];
-        }
-        int query(int p, int low, int high, int l, int r) {
-            if(l > r || high < l || r < low) return 0;
-            if(l <= low && high <= r) return v[p];
-            int mid = (low + high) / 2;
-            return query(p*2, low, mid, l, r) + query(p*2+1, mid+1, high, l, r);
-        }
-    } TREE;
     int n;
+    vector<int> ans;
+    
+    void merge(vector<pair<int,int>> &ar, int l, int m, int r) {
+        vector<pair<int,int>> left, right;
+        for(int i=l; i<=m; i++)     left.push_back(ar[i]);
+        for(int i=m+1; i<=r; i++)   right.push_back(ar[i]);
+        
+        int i = 0, j = 0;
+        while(i < left.size() && j < right.size()) {
+            if(left[i].first < right[j].first)
+                ans[left[i].second] += j, ar[l++] = left[i++];
+            else
+                ar[l++] = right[j++];
+        }
+        
+        while(i < left.size())
+            ans[left[i].second] += j, ar[l++] = left[i++];
+        while(j < right.size())
+            ar[l++] = right[j++];
+    }
+    
+    void merge_sort(vector<pair<int,int>> &ar, int l, int r) {
+        if(l >= r) return;
+        int m = (l + r) / 2;
+        merge_sort(ar, l, m);
+        merge_sort(ar, m+1, r);
+        merge(ar, l, m, r);
+    }
+    
 public:
     vector<int> countSmaller(vector<int>& nums) {
         n = nums.size();
-        // segmentTree TREE;
-        vector<int> ans(n, 0);
-        for(int i=n-1; i>=0; i--) {
-            ans[i] = TREE.count(nums[i]);
-            TREE.insert(nums[i]);
+        ans = vector<int>(n, 0);
+        
+        unordered_map<int,int> mp;
+        vector<pair<int,int>> v(n);
+        for(int i = n-1; i>=0; i--) {
+            v[i] = {nums[i], i};
+            ans[i] -= mp[nums[i]];
+            mp[nums[i]]++;
         }
+        
+        merge_sort(v, 0, n-1);
         return ans;
     }
 };
