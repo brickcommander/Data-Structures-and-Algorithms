@@ -8,6 +8,7 @@ public:
         
         set<vector<int>> st;
         st.insert({0, 0, 0});
+        dp[0][0] = 0;
         
         while(st.size()) {
             vector<int> f = *st.begin();
