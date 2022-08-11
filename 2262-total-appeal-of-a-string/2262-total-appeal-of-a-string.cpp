@@ -9,7 +9,6 @@ public:
             int x = s[i] - 'a';
             int l = i - prev[x] - 1, r = n - i - 1;
             ans += l + r + 1 + l * r;
-            // cout << i << "-" << l << "-" << r << "-" << l+r+1+l*r << endl;
             prev[x] = i;
         }
         
