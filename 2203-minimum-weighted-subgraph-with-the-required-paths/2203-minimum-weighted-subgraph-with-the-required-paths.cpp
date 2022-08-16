@@ -20,8 +20,8 @@ class Solution {
         dist[src] = 0;
         while(q.size()) {
             auto [u, c] = q.front(); q.pop();
-            if(dist[u] < c) continue;
-            dist[u] = c;
+            if(dist[u] != c) continue;
+            // dist[u] = c;
             for(pii p: g[u]) {
                 int v = p.F;
                 int cost = p.S;
