@@ -13,7 +13,7 @@ class Solution {
     bool go(ListNode *head, ListNode* prev, ListNode **r) {
         bool f = (head == prev);
         if(head != prev) f = go(head->next, prev, &(*r));
-        if(f && (*r) && head->val == (*r)->val) {
+        if(f && head->val == (*r)->val) {
             (*r) = ((*r)->next);
             return true;
         }
