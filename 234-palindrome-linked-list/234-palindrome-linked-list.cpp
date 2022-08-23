@@ -9,10 +9,41 @@
  * };
  */
 class Solution {
+    // Approach 2: Recusrion, O(n) Recursion Stack Space and O(1) Time
+    bool go(ListNode *head, ListNode* prev, ListNode **r) {
+        bool f = (head == prev);
+        if(head != prev) f = go(head->next, prev, &(*r));
+        if(f && (*r) && head->val == (*r)->val) {
+            (*r) = ((*r)->next);
+            return true;
+        }
+        return false;
+    }
+    
+    bool RecursionApproach(ListNode *head) {
+        if(head->next == NULL) return true;
+        ListNode *f = head, *s = head, *prev = NULL;
+        while(f->next && f->next->next) {
+            prev = s;
+            s = s->next;
+            f = f->next->next;
+        }
+        if(f->next == NULL) {
+            // ODD length
+            ListNode *r = s->next;
+            return go(head, prev, &r);
+        } else {
+            ListNode *r = s->next;
+            return go(head, s, &r);
+        }
+    }
 public:
     // O(n) Time and O(1) Space
-    // 
+    // Loss of Original Linked List
     bool isPalindrome(ListNode* head) {
+        
+        return RecursionApproach(head);
+        
         ListNode *fast = head, *slow = head, *prev = NULL;
         bool odd = false;
         while(fast->next && fast->next->next) {
